@@ -8,6 +8,24 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
+
+const path = require('path');
+const express = require('express');
+// ...the rest of your setup code
+
+// Serve the frontend build folder
+app.use(express.static(path.join(__dirname, 'build')));
+
+// Catch-all route to serve index.html for any non-API requests
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
+// Then start your server
+app.listen(process.env.PORT || 4000, () => {
+  console.log('Server running...');
+});
+
 // PDF & Excel
 const PDFDocument = require('pdfkit');
 const XLSX = require('xlsx');
